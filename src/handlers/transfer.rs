@@ -1,37 +1,68 @@
 use crate::models::{
     AccountInfoCamelCase, SendSolRequest, SendTokenRequest, SolTransferData, TokenTransferData,
 };
-use crate::utils::{error_response, success_response};
-use actix_web::{web, HttpResponse, Result};
+use crate::utils::{error_response, log_request, log_response, success_response};
+use actix_web::{web, HttpRequest, HttpResponse, Result};
 use base64::{engine::general_purpose, Engine};
+use serde_json::json;
 use solana_sdk::{pubkey::Pubkey, system_instruction};
 use spl_associated_token_account::get_associated_token_address;
 use spl_token::instruction as token_instruction;
 use std::str::FromStr;
 
 // Endpoint: POST /send/sol
-pub async fn send_sol(req: web::Json<SendSolRequest>) -> Result<HttpResponse> {
+pub async fn send_sol(req: HttpRequest, body: web::Json<SendSolRequest>) -> Result<HttpResponse> {
+    log_request(&req, "/send/sol", Some(&json!(&*body)));
+
     // Validate required fields
-    if req.from.is_empty() || req.to.is_empty() {
-        return Ok(error_response("Missing required fields"));
+    if body.from.is_empty() || body.to.is_empty() {
+        let error_msg = "Missing required fields";
+        log_response(
+            "/send/sol",
+            400,
+            &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
+        );
+        return Ok(error_response(error_msg));
     }
 
-    let from = match Pubkey::from_str(&req.from) {
+    let from = match Pubkey::from_str(&body.from) {
         Ok(pubkey) => pubkey,
-        Err(_) => return Ok(error_response("Invalid from address")),
+        Err(_) => {
+            let error_msg = "Invalid from address";
+            log_response(
+                "/send/sol",
+                400,
+                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
+            );
+            return Ok(error_response(error_msg));
+        }
     };
 
-    let to = match Pubkey::from_str(&req.to) {
+    let to = match Pubkey::from_str(&body.to) {
         Ok(pubkey) => pubkey,
-        Err(_) => return Ok(error_response("Invalid to address")),
+        Err(_) => {
+            let error_msg = "Invalid to address";
+            log_response(
+                "/send/sol",
+                400,
+                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
+            );
+            return Ok(error_response(error_msg));
+        }
     };
 
-    if req.lamports == 0 {
-        return Ok(error_response("Amount must be greater than 0"));
+    if body.lamports == 0 {
+        let error_msg = "Amount must be greater than 0";
+        log_response(
+            "/send/sol",
+            400,
+            &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
+        );
+        return Ok(error_response(error_msg));
     }
 
     // Create transfer instruction
-    let instruction = system_instruction::transfer(&from, &to, req.lamports);
+    let instruction = system_instruction::transfer(&from, &to, body.lamports);
 
     let accounts = vec![
         instruction.accounts[0].pubkey.to_string(),
@@ -44,33 +75,77 @@ pub async fn send_sol(req: web::Json<SendSolRequest>) -> Result<HttpResponse> {
         instruction_data: general_purpose::STANDARD.encode(&instruction.data),
     };
 
-    Ok(success_response(instruction_data))
+    let response = success_response(&instruction_data);
+    log_response("/send/sol", 200, &json!(instruction_data).to_string());
+
+    Ok(response)
 }
 
 // Endpoint: POST /send/token
-pub async fn send_token(req: web::Json<SendTokenRequest>) -> Result<HttpResponse> {
+pub async fn send_token(
+    req: HttpRequest,
+    body: web::Json<SendTokenRequest>,
+) -> Result<HttpResponse> {
+    log_request(&req, "/send/token", Some(&json!(&*body)));
+
     // Validate required fields
-    if req.destination.is_empty() || req.mint.is_empty() || req.owner.is_empty() {
-        return Ok(error_response("Missing required fields"));
+    if body.destination.is_empty() || body.mint.is_empty() || body.owner.is_empty() {
+        let error_msg = "Missing required fields";
+        log_response(
+            "/send/token",
+            400,
+            &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
+        );
+        return Ok(error_response(error_msg));
     }
 
-    let destination = match Pubkey::from_str(&req.destination) {
+    let destination = match Pubkey::from_str(&body.destination) {
         Ok(pubkey) => pubkey,
-        Err(_) => return Ok(error_response("Invalid destination address")),
+        Err(_) => {
+            let error_msg = "Invalid destination address";
+            log_response(
+                "/send/token",
+                400,
+                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
+            );
+            return Ok(error_response(error_msg));
+        }
     };
 
-    let mint = match Pubkey::from_str(&req.mint) {
+    let mint = match Pubkey::from_str(&body.mint) {
         Ok(pubkey) => pubkey,
-        Err(_) => return Ok(error_response("Invalid mint address")),
+        Err(_) => {
+            let error_msg = "Invalid mint address";
+            log_response(
+                "/send/token",
+                400,
+                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
+            );
+            return Ok(error_response(error_msg));
+        }
     };
 
-    let owner = match Pubkey::from_str(&req.owner) {
+    let owner = match Pubkey::from_str(&body.owner) {
         Ok(pubkey) => pubkey,
-        Err(_) => return Ok(error_response("Invalid owner address")),
+        Err(_) => {
+            let error_msg = "Invalid owner address";
+            log_response(
+                "/send/token",
+                400,
+                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
+            );
+            return Ok(error_response(error_msg));
+        }
     };
 
-    if req.amount == 0 {
-        return Ok(error_response("Amount must be greater than 0"));
+    if body.amount == 0 {
+        let error_msg = "Amount must be greater than 0";
+        log_response(
+            "/send/token",
+            400,
+            &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
+        );
+        return Ok(error_response(error_msg));
     }
 
     // Get associated token accounts
@@ -84,10 +159,18 @@ pub async fn send_token(req: web::Json<SendTokenRequest>) -> Result<HttpResponse
         &destination_ata,
         &owner,
         &[],
-        req.amount,
+        body.amount,
     ) {
         Ok(inst) => inst,
-        Err(_) => return Ok(error_response("Failed to create transfer instruction")),
+        Err(_) => {
+            let error_msg = "Failed to create transfer instruction";
+            log_response(
+                "/send/token",
+                400,
+                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
+            );
+            return Ok(error_response(error_msg));
+        }
     };
 
     let accounts: Vec<AccountInfoCamelCase> = instruction
@@ -105,5 +188,8 @@ pub async fn send_token(req: web::Json<SendTokenRequest>) -> Result<HttpResponse
         instruction_data: general_purpose::STANDARD.encode(&instruction.data),
     };
 
-    Ok(success_response(instruction_data))
+    let response = success_response(&instruction_data);
+    log_response("/send/token", 200, &json!(instruction_data).to_string());
+
+    Ok(response)
 }

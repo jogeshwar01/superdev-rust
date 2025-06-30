@@ -6,11 +6,15 @@ mod routes;
 mod utils;
 
 use routes::configure_routes;
+use utils::log_startup;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     dotenv::dotenv().ok();
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
+
+    // Log server startup
+    log_startup();
 
     println!("🚀 Starting Solana Fellowship Server at http://0.0.0.0:8080");
     println!("\nAvailable Endpoints:");

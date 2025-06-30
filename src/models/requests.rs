@@ -1,6 +1,6 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Serialize)]
 pub struct CreateTokenRequest {
     #[serde(alias = "mintAuthority")]
     pub mint_authority: String,
@@ -8,7 +8,7 @@ pub struct CreateTokenRequest {
     pub decimals: u8,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Serialize)]
 pub struct MintTokenRequest {
     pub mint: String,
     pub destination: String,
@@ -16,27 +16,27 @@ pub struct MintTokenRequest {
     pub amount: u64,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Serialize)]
 pub struct SignMessageRequest {
     pub message: String,
     pub secret: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Serialize)]
 pub struct VerifyMessageRequest {
     pub message: String,
     pub signature: String,
     pub pubkey: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Serialize)]
 pub struct SendSolRequest {
     pub from: String,
     pub to: String,
     pub lamports: u64,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Serialize)]
 pub struct SendTokenRequest {
     pub destination: String,
     pub mint: String,

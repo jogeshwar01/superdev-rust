@@ -1,0 +1,304 @@
+
+
+🚀 ================ SERVER STARTED 2025-06-30 17:19:49.931 UTC ================
+
+
+=== REQUEST 2025-06-30 17:20:23.869 UTC ===
+Timestamp: 2025-06-30 17:20:23.869 UTC
+Method: POST
+Route: /keypair
+URI: /keypair
+Headers: HeaderMap { inner: {"x-forwarded-for": Value { inner: ["159.89.161.122"] }, "accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-proto": Value { inner: ["https"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "content-length": Value { inner: ["0"] }, "user-agent": Value { inner: ["axios/1.7.7"] }, "content-type": Value { inner: ["application/x-www-form-urlencoded"] }} }
+Body: None
+=== RESPONSE 2025-06-30 17:20:23.870 UTC ===
+Timestamp: 2025-06-30 17:20:23.870 UTC
+Route: /keypair
+Status Code: 200
+Response Body: {"pubkey":"FRZAMWof9wUFXjvJ2bFcGCLXAyQn5YgLP3QxRSnw1zEq","secret":"2rmhQ23mumoX29KdG1Vg4iG5bsAGT9oJfrY3kwLrWHugUydBpiZXfaooDDSVKfetPAbLy9XTea9MmbQqJed5Udmf"}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:24.038 UTC ===
+Timestamp: 2025-06-30 17:20:24.038 UTC
+Method: POST
+Route: /keypair
+URI: /keypair
+Headers: HeaderMap { inner: {"accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-for": Value { inner: ["159.89.161.122"] }, "content-type": Value { inner: ["application/x-www-form-urlencoded"] }, "content-length": Value { inner: ["0"] }, "x-forwarded-proto": Value { inner: ["https"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "user-agent": Value { inner: ["axios/1.7.7"] }} }
+Body: None
+=== RESPONSE 2025-06-30 17:20:24.039 UTC ===
+Timestamp: 2025-06-30 17:20:24.039 UTC
+Route: /keypair
+Status Code: 200
+Response Body: {"pubkey":"DW2EjdkgArK6TXVcGUDZqjtgr1k14gKYEzK4nDiHuguV","secret":"pjxF1Kf2mq6tErswtQArLqqTnXssPXHWBJX3ze4rPM3D3eUPnCSY6G39K2VnSiZEjAUxcoVypCaP3u5QWZYqBv7"}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:24.255 UTC ===
+Timestamp: 2025-06-30 17:20:24.255 UTC
+Method: POST
+Route: /token/create
+URI: /token/create
+Headers: HeaderMap { inner: {"x-forwarded-for": Value { inner: ["159.89.161.122"] }, "accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-proto": Value { inner: ["https"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "content-length": Value { inner: ["131"] }, "user-agent": Value { inner: ["axios/1.7.7"] }, "content-type": Value { inner: ["application/json"] }} }
+Body: {"decimals":6,"mint":"FprSs5oC8Hcu6UPT6qwTcWzWXFmt8P1Zjd5ssLYrJo5k","mint_authority":"DW2EjdkgArK6TXVcGUDZqjtgr1k14gKYEzK4nDiHuguV"}
+=== RESPONSE 2025-06-30 17:20:24.255 UTC ===
+Timestamp: 2025-06-30 17:20:24.255 UTC
+Route: /token/create
+Status Code: 200
+Response Body: {"accounts":[{"is_signer":false,"is_writable":true,"pubkey":"FprSs5oC8Hcu6UPT6qwTcWzWXFmt8P1Zjd5ssLYrJo5k"},{"is_signer":false,"is_writable":false,"pubkey":"SysvarRent111111111111111111111111111111111"}],"instruction_data":"AAa5u3wsAtCGzH9tzn+LTuHLbt5uRhX4WX3FwOAlvSl6oAG5u3wsAtCGzH9tzn+LTuHLbt5uRhX4WX3FwOAlvSl6oA==","program_id":"TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:24.408 UTC ===
+Timestamp: 2025-06-30 17:20:24.408 UTC
+Method: POST
+Route: /token/create
+URI: /token/create
+Headers: HeaderMap { inner: {"accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-for": Value { inner: ["159.89.161.122"] }, "content-type": Value { inner: ["application/json"] }, "content-length": Value { inner: ["131"] }, "x-forwarded-proto": Value { inner: ["https"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "user-agent": Value { inner: ["axios/1.7.7"] }} }
+Body: {"decimals":6,"mint":"9otC2WAoPDZYR7N19wSpGmYsCP5B9wii1g3oMxCD4Rzj","mint_authority":"DW2EjdkgArK6TXVcGUDZqjtgr1k14gKYEzK4nDiHuguV"}
+=== RESPONSE 2025-06-30 17:20:24.409 UTC ===
+Timestamp: 2025-06-30 17:20:24.409 UTC
+Route: /token/create
+Status Code: 200
+Response Body: {"accounts":[{"is_signer":false,"is_writable":true,"pubkey":"9otC2WAoPDZYR7N19wSpGmYsCP5B9wii1g3oMxCD4Rzj"},{"is_signer":false,"is_writable":false,"pubkey":"SysvarRent111111111111111111111111111111111"}],"instruction_data":"AAa5u3wsAtCGzH9tzn+LTuHLbt5uRhX4WX3FwOAlvSl6oAG5u3wsAtCGzH9tzn+LTuHLbt5uRhX4WX3FwOAlvSl6oA==","program_id":"TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:24.565 UTC ===
+Timestamp: 2025-06-30 17:20:24.565 UTC
+Method: POST
+Route: /token/create
+URI: /token/create
+Headers: HeaderMap { inner: {"x-forwarded-for": Value { inner: ["159.89.161.122"] }, "accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-proto": Value { inner: ["https"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "content-length": Value { inner: ["76"] }, "user-agent": Value { inner: ["axios/1.7.7"] }, "content-type": Value { inner: ["application/json"] }} }
+Body: {"decimals":6,"mint":"asdadsdas","mint_authority":"askdjkadsjkdsajkdajadkjk"}
+=== RESPONSE 2025-06-30 17:20:24.565 UTC ===
+Timestamp: 2025-06-30 17:20:24.565 UTC
+Route: /token/create
+Status Code: 400
+Response Body: {"success":false,"error":"Invalid mint authority address"}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:25.004 UTC ===
+Timestamp: 2025-06-30 17:20:25.004 UTC
+Method: POST
+Route: /token/mint
+URI: /token/mint
+Headers: HeaderMap { inner: {"x-forwarded-for": Value { inner: ["159.89.161.122"] }, "accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-proto": Value { inner: ["https"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "content-length": Value { inner: ["192"] }, "user-agent": Value { inner: ["axios/1.7.7"] }, "content-type": Value { inner: ["application/json"] }} }
+Body: {"amount":1000000,"authority":"DW2EjdkgArK6TXVcGUDZqjtgr1k14gKYEzK4nDiHuguV","destination":"GNVdZN1LKEXmzgN7va7o181y4bLhePWJB3pkkpYeXyqt","mint":"4FHZTnxCYBbz7fCQESNQLEiTH1nxSprA8fpexw2oeEyj"}
+=== RESPONSE 2025-06-30 17:20:25.005 UTC ===
+Timestamp: 2025-06-30 17:20:25.005 UTC
+Route: /token/mint
+Status Code: 200
+Response Body: {"accounts":[{"is_signer":false,"is_writable":true,"pubkey":"4FHZTnxCYBbz7fCQESNQLEiTH1nxSprA8fpexw2oeEyj"},{"is_signer":false,"is_writable":true,"pubkey":"EGM61aPWYWLXukJy9tcqqj9B2rELXmRKqkGFMBHBqPe9"},{"is_signer":true,"is_writable":false,"pubkey":"DW2EjdkgArK6TXVcGUDZqjtgr1k14gKYEzK4nDiHuguV"}],"instruction_data":"B0BCDwAAAAAA","program_id":"TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:25.164 UTC ===
+Timestamp: 2025-06-30 17:20:25.164 UTC
+Method: POST
+Route: /token/mint
+URI: /token/mint
+Headers: HeaderMap { inner: {"accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-for": Value { inner: ["159.89.161.122"] }, "content-type": Value { inner: ["application/json"] }, "content-length": Value { inner: ["81"] }, "x-forwarded-proto": Value { inner: ["https"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "user-agent": Value { inner: ["axios/1.7.7"] }} }
+Body: {"amount":1000000,"authority":"asdadsads","destination":"Asdads","mint":"Adsasd"}
+=== RESPONSE 2025-06-30 17:20:25.164 UTC ===
+Timestamp: 2025-06-30 17:20:25.164 UTC
+Route: /token/mint
+Status Code: 400
+Response Body: {"success":false,"error":"Invalid mint address"}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:25.527 UTC ===
+Timestamp: 2025-06-30 17:20:25.527 UTC
+Method: POST
+Route: /message/sign
+URI: /message/sign
+Headers: HeaderMap { inner: {"accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-for": Value { inner: ["159.89.161.122"] }, "content-type": Value { inner: ["application/json"] }, "content-length": Value { inner: ["127"] }, "x-forwarded-proto": Value { inner: ["https"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "user-agent": Value { inner: ["axios/1.7.7"] }} }
+Body: {"message":"Hello, Solana!","secret":"pjxF1Kf2mq6tErswtQArLqqTnXssPXHWBJX3ze4rPM3D3eUPnCSY6G39K2VnSiZEjAUxcoVypCaP3u5QWZYqBv7"}
+=== RESPONSE 2025-06-30 17:20:25.528 UTC ===
+Timestamp: 2025-06-30 17:20:25.528 UTC
+Route: /message/sign
+Status Code: 200
+Response Body: {"message":"Hello, Solana!","public_key":"DW2EjdkgArK6TXVcGUDZqjtgr1k14gKYEzK4nDiHuguV","signature":"5Te9qSPE5jqmaOpuFgAZJS4BcuE0OgO5qCrwPVv1CoAeWV0N2hypX5TS2z3h62F5x8aZs6X0+KHo4UY7qC6TCg=="}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:25.731 UTC ===
+Timestamp: 2025-06-30 17:20:25.731 UTC
+Method: POST
+Route: /message/sign
+URI: /message/sign
+Headers: HeaderMap { inner: {"x-forwarded-for": Value { inner: ["159.89.161.122"] }, "accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-proto": Value { inner: ["https"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "content-length": Value { inner: ["46"] }, "user-agent": Value { inner: ["axios/1.7.7"] }, "content-type": Value { inner: ["application/json"] }} }
+Body: {"message":"Hello, Solana!","secret":"secret"}
+=== RESPONSE 2025-06-30 17:20:25.731 UTC ===
+Timestamp: 2025-06-30 17:20:25.731 UTC
+Route: /message/sign
+Status Code: 400
+Response Body: {"success":false,"error":"Invalid secret key"}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:25.818 UTC ===
+Timestamp: 2025-06-30 17:20:25.818 UTC
+Method: POST
+Route: /message/sign
+URI: /message/sign
+Headers: HeaderMap { inner: {"accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-for": Value { inner: ["159.89.161.122"] }, "content-type": Value { inner: ["application/json"] }, "content-length": Value { inner: ["127"] }, "x-forwarded-proto": Value { inner: ["https"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "user-agent": Value { inner: ["axios/1.7.7"] }} }
+Body: {"message":"Hello, Solana!","secret":"pjxF1Kf2mq6tErswtQArLqqTnXssPXHWBJX3ze4rPM3D3eUPnCSY6G39K2VnSiZEjAUxcoVypCaP3u5QWZYqBv7"}
+=== RESPONSE 2025-06-30 17:20:25.819 UTC ===
+Timestamp: 2025-06-30 17:20:25.819 UTC
+Route: /message/sign
+Status Code: 200
+Response Body: {"message":"Hello, Solana!","public_key":"DW2EjdkgArK6TXVcGUDZqjtgr1k14gKYEzK4nDiHuguV","signature":"5Te9qSPE5jqmaOpuFgAZJS4BcuE0OgO5qCrwPVv1CoAeWV0N2hypX5TS2z3h62F5x8aZs6X0+KHo4UY7qC6TCg=="}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:25.987 UTC ===
+Timestamp: 2025-06-30 17:20:25.987 UTC
+Method: POST
+Route: /message/sign
+URI: /message/sign
+Headers: HeaderMap { inner: {"x-forwarded-for": Value { inner: ["159.89.161.122"] }, "accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-proto": Value { inner: ["https"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "content-length": Value { inner: ["129"] }, "user-agent": Value { inner: ["axios/1.7.7"] }, "content-type": Value { inner: ["application/json"] }} }
+Body: {"message":"Goodbye, Solana!","secret":"pjxF1Kf2mq6tErswtQArLqqTnXssPXHWBJX3ze4rPM3D3eUPnCSY6G39K2VnSiZEjAUxcoVypCaP3u5QWZYqBv7"}
+=== RESPONSE 2025-06-30 17:20:25.988 UTC ===
+Timestamp: 2025-06-30 17:20:25.988 UTC
+Route: /message/sign
+Status Code: 200
+Response Body: {"message":"Goodbye, Solana!","public_key":"DW2EjdkgArK6TXVcGUDZqjtgr1k14gKYEzK4nDiHuguV","signature":"HRI+zgGr8IThwT9KMct5RM9JeCPtiGy92G1G2eHgMLu6RaHLLusoiUwvw4/Wa+p1FDWFwUaO5FjG0+t5wpvRCw=="}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:26.165 UTC ===
+Timestamp: 2025-06-30 17:20:26.165 UTC
+Method: POST
+Route: /message/sign
+URI: /message/sign
+Headers: HeaderMap { inner: {"accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-for": Value { inner: ["159.89.161.122"] }, "content-type": Value { inner: ["application/json"] }, "content-length": Value { inner: ["127"] }, "x-forwarded-proto": Value { inner: ["https"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "user-agent": Value { inner: ["axios/1.7.7"] }} }
+Body: {"message":"Hello, Solana!","secret":"pjxF1Kf2mq6tErswtQArLqqTnXssPXHWBJX3ze4rPM3D3eUPnCSY6G39K2VnSiZEjAUxcoVypCaP3u5QWZYqBv7"}
+=== RESPONSE 2025-06-30 17:20:26.166 UTC ===
+Timestamp: 2025-06-30 17:20:26.166 UTC
+Route: /message/sign
+Status Code: 200
+Response Body: {"message":"Hello, Solana!","public_key":"DW2EjdkgArK6TXVcGUDZqjtgr1k14gKYEzK4nDiHuguV","signature":"5Te9qSPE5jqmaOpuFgAZJS4BcuE0OgO5qCrwPVv1CoAeWV0N2hypX5TS2z3h62F5x8aZs6X0+KHo4UY7qC6TCg=="}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:26.337 UTC ===
+Timestamp: 2025-06-30 17:20:26.337 UTC
+Method: POST
+Route: /message/sign
+URI: /message/sign
+Headers: HeaderMap { inner: {"x-forwarded-for": Value { inner: ["159.89.161.122"] }, "accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-proto": Value { inner: ["https"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "content-length": Value { inner: ["127"] }, "user-agent": Value { inner: ["axios/1.7.7"] }, "content-type": Value { inner: ["application/json"] }} }
+Body: {"message":"Hello, Solana!","secret":"pjxF1Kf2mq6tErswtQArLqqTnXssPXHWBJX3ze4rPM3D3eUPnCSY6G39K2VnSiZEjAUxcoVypCaP3u5QWZYqBv7"}
+=== RESPONSE 2025-06-30 17:20:26.338 UTC ===
+Timestamp: 2025-06-30 17:20:26.338 UTC
+Route: /message/sign
+Status Code: 200
+Response Body: {"message":"Hello, Solana!","public_key":"DW2EjdkgArK6TXVcGUDZqjtgr1k14gKYEzK4nDiHuguV","signature":"5Te9qSPE5jqmaOpuFgAZJS4BcuE0OgO5qCrwPVv1CoAeWV0N2hypX5TS2z3h62F5x8aZs6X0+KHo4UY7qC6TCg=="}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:26.637 UTC ===
+Timestamp: 2025-06-30 17:20:26.637 UTC
+Method: POST
+Route: /send/sol
+URI: /send/sol
+Headers: HeaderMap { inner: {"x-forwarded-for": Value { inner: ["159.89.161.122"] }, "accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-proto": Value { inner: ["https"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "content-length": Value { inner: ["126"] }, "user-agent": Value { inner: ["axios/1.7.7"] }, "content-type": Value { inner: ["application/json"] }} }
+Body: {"from":"4pNbGHVMBrFTukvDsPd8j2jyHhPPvQC3BCg9Zk7J1Zj9","lamports":1000000,"to":"JCxPCfr7QEqLrci9KWvHSN6Bxq8dfUD2Y6DHCWrXQFtm"}
+=== RESPONSE 2025-06-30 17:20:26.637 UTC ===
+Timestamp: 2025-06-30 17:20:26.637 UTC
+Route: /send/sol
+Status Code: 200
+Response Body: {"accounts":["4pNbGHVMBrFTukvDsPd8j2jyHhPPvQC3BCg9Zk7J1Zj9","JCxPCfr7QEqLrci9KWvHSN6Bxq8dfUD2Y6DHCWrXQFtm"],"instruction_data":"AgAAAEBCDwAAAAAA","program_id":"11111111111111111111111111111111"}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:26.793 UTC ===
+Timestamp: 2025-06-30 17:20:26.793 UTC
+Method: POST
+Route: /send/sol
+URI: /send/sol
+Headers: HeaderMap { inner: {"accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-for": Value { inner: ["159.89.161.122"] }, "content-type": Value { inner: ["application/json"] }, "content-length": Value { inner: ["120"] }, "x-forwarded-proto": Value { inner: ["https"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "user-agent": Value { inner: ["axios/1.7.7"] }} }
+Body: {"from":"6iK712LJURvPJUis1FoYRBLFHjRTUWkHM1ApRwuSb5yo","lamports":0,"to":"FRG8wuLDritqapzmTe8SirpMzP7pF3FXtFXoF4WEPD2D"}
+=== RESPONSE 2025-06-30 17:20:26.793 UTC ===
+Timestamp: 2025-06-30 17:20:26.793 UTC
+Route: /send/sol
+Status Code: 400
+Response Body: {"success":false,"error":"Amount must be greater than 0"}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:27.061 UTC ===
+Timestamp: 2025-06-30 17:20:27.061 UTC
+Method: POST
+Route: /send/sol
+URI: /send/sol
+Headers: HeaderMap { inner: {"x-forwarded-for": Value { inner: ["159.89.161.122"] }, "accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-proto": Value { inner: ["https"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "content-length": Value { inner: ["88"] }, "user-agent": Value { inner: ["axios/1.7.7"] }, "content-type": Value { inner: ["application/json"] }} }
+Body: {"from":"sender","lamports":1000000,"to":"HyKU3AQgntpiuU5u2iHCRR46vjWUC6iEtBzJ8NKtXrT7"}
+=== RESPONSE 2025-06-30 17:20:27.062 UTC ===
+Timestamp: 2025-06-30 17:20:27.062 UTC
+Route: /send/sol
+Status Code: 400
+Response Body: {"success":false,"error":"Invalid from address"}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:27.228 UTC ===
+Timestamp: 2025-06-30 17:20:27.228 UTC
+Method: POST
+Route: /send/sol
+URI: /send/sol
+Headers: HeaderMap { inner: {"accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-for": Value { inner: ["159.89.161.122"] }, "content-type": Value { inner: ["application/json"] }, "content-length": Value { inner: ["126"] }, "x-forwarded-proto": Value { inner: ["https"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "user-agent": Value { inner: ["axios/1.7.7"] }} }
+Body: {"from":"ALtcHYoxspESPaVvuhPQgb8mPGLFkYwKazQFkCfv2ddi","lamports":1000000,"to":"G2QTRKAkm1tJj9BerkrLJHmXetatNgsY2dRXBMknEGDC"}
+=== RESPONSE 2025-06-30 17:20:27.229 UTC ===
+Timestamp: 2025-06-30 17:20:27.229 UTC
+Route: /send/sol
+Status Code: 200
+Response Body: {"accounts":["ALtcHYoxspESPaVvuhPQgb8mPGLFkYwKazQFkCfv2ddi","G2QTRKAkm1tJj9BerkrLJHmXetatNgsY2dRXBMknEGDC"],"instruction_data":"AgAAAEBCDwAAAAAA","program_id":"11111111111111111111111111111111"}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:27.305 UTC ===
+Timestamp: 2025-06-30 17:20:27.305 UTC
+Method: POST
+Route: /send/sol
+URI: /send/sol
+Headers: HeaderMap { inner: {"x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "user-agent": Value { inner: ["axios/1.7.7"] }, "content-type": Value { inner: ["application/json"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-for": Value { inner: ["159.89.161.122"] }, "content-length": Value { inner: ["126"] }, "x-forwarded-proto": Value { inner: ["https"] }, "accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }} }
+Body: {"from":"ALtcHYoxspESPaVvuhPQgb8mPGLFkYwKazQFkCfv2ddi","lamports":1000000,"to":"G2QTRKAkm1tJj9BerkrLJHmXetatNgsY2dRXBMknEGDC"}
+=== RESPONSE 2025-06-30 17:20:27.306 UTC ===
+Timestamp: 2025-06-30 17:20:27.306 UTC
+Route: /send/sol
+Status Code: 200
+Response Body: {"accounts":["ALtcHYoxspESPaVvuhPQgb8mPGLFkYwKazQFkCfv2ddi","G2QTRKAkm1tJj9BerkrLJHmXetatNgsY2dRXBMknEGDC"],"instruction_data":"AgAAAEBCDwAAAAAA","program_id":"11111111111111111111111111111111"}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:27.416 UTC ===
+Timestamp: 2025-06-30 17:20:27.416 UTC
+Method: POST
+Route: /send/sol
+URI: /send/sol
+Headers: HeaderMap { inner: {"accept": Value { inner: ["application/json, text/plain, */*"] }, "content-type": Value { inner: ["application/json"] }, "x-forwarded-proto": Value { inner: ["https"] }, "user-agent": Value { inner: ["axios/1.7.7"] }, "x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "content-length": Value { inner: ["122"] }, "x-forwarded-for": Value { inner: ["159.89.161.122"] }, "accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }} }
+Body: {"from":"BxcUgwxyCwhxyxmmTeBWQnvP1URnu9DgCS8c14Swki1d","lamports":200,"to":"5grtcBJy7GRNmPmapPLnJKu2UDJvVyjKAUBtyydjP3aq"}
+=== RESPONSE 2025-06-30 17:20:27.417 UTC ===
+Timestamp: 2025-06-30 17:20:27.417 UTC
+Route: /send/sol
+Status Code: 200
+Response Body: {"accounts":["BxcUgwxyCwhxyxmmTeBWQnvP1URnu9DgCS8c14Swki1d","5grtcBJy7GRNmPmapPLnJKu2UDJvVyjKAUBtyydjP3aq"],"instruction_data":"AgAAAMgAAAAAAAAA","program_id":"11111111111111111111111111111111"}
+==================
+
+
+=== REQUEST 2025-06-30 17:20:27.503 UTC ===
+Timestamp: 2025-06-30 17:20:27.503 UTC
+Method: POST
+Route: /send/token
+URI: /send/token
+Headers: HeaderMap { inner: {"x-forwarded-host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "host": Value { inner: ["bf08-2a09-bac5-3b02-10f0-00-1b0-d.ngrok-free.app"] }, "user-agent": Value { inner: ["axios/1.7.7"] }, "content-type": Value { inner: ["application/json"] }, "accept": Value { inner: ["application/json, text/plain, */*"] }, "x-forwarded-for": Value { inner: ["159.89.161.122"] }, "content-length": Value { inner: ["188"] }, "x-forwarded-proto": Value { inner: ["https"] }, "accept-encoding": Value { inner: ["gzip, compress, deflate, br"] }} }
+Body: {"amount":1000000,"destination":"HMZjHw7d1cQySP4qkTh199n3gA7oXsszFVVUJVy4fPdb","mint":"E75X11RrWu4NYaeKcFsepQKYJHMM8CU3qM5NgrhsCY9B","owner":"54CMi5cattfzwj59tGdtchoi1HyfmXcGGSBXnReGmfv1"}
+=== RESPONSE 2025-06-30 17:20:27.504 UTC ===
+Timestamp: 2025-06-30 17:20:27.504 UTC
+Route: /send/token
+Status Code: 200
+Response Body: {"accounts":[{"isSigner":false,"pubkey":"GaDK8LhFJMMKZQeN6tyJUPzZXrYAFoj6XqgwVDQrDbRN"},{"isSigner":false,"pubkey":"86t8j8312mtQToLEXN3WW1zwWG7h95Psa3LDcz8UEDyn"},{"isSigner":true,"pubkey":"54CMi5cattfzwj59tGdtchoi1HyfmXcGGSBXnReGmfv1"}],"instruction_data":"A0BCDwAAAAAA","program_id":"TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"}
+==================
+

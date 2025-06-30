@@ -16,4 +16,5 @@ spl-token = "4.0"
 spl-associated-token-account = "2.3"
 bs58 = "0.5"
 base64 = "0.22"
-dotenv = "0.15" 
+dotenv = "0.15"
+chrono = { version = "0.4", features = ["serde"] } 
