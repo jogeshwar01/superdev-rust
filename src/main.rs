@@ -19,14 +19,14 @@ async fn main() -> std::io::Result<()> {
     // Initialize logger
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
 
-    println!("Starting server at http://127.0.0.1:8080");
+    println!("Starting server at http://0.0.0.0:8080");
 
     HttpServer::new(|| {
         App::new()
             .wrap(Logger::default())
             .configure(configure_routes)
     })
-    .bind("127.0.0.1:8080")?
+    .bind("0.0.0.0:8080")?
     .run()
     .await
 }
