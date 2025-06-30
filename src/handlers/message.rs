@@ -11,6 +11,11 @@ use solana_sdk::{
 
 // Endpoint: POST /message/sign
 pub async fn sign_message(req: web::Json<SignMessageRequest>) -> Result<HttpResponse> {
+    // Check for missing required fields
+    if req.message.is_empty() || req.secret.is_empty() {
+        return Ok(error_response("Missing required fields"));
+    }
+
     // Decode the secret key
     let secret_bytes = match bs58::decode(&req.secret).into_vec() {
         Ok(bytes) => bytes,
@@ -35,6 +40,11 @@ pub async fn sign_message(req: web::Json<SignMessageRequest>) -> Result<HttpResp
 
 // Endpoint: POST /message/verify
 pub async fn verify_message(req: web::Json<VerifyMessageRequest>) -> Result<HttpResponse> {
+    // Check for missing required fields
+    if req.message.is_empty() || req.signature.is_empty() || req.pubkey.is_empty() {
+        return Ok(error_response("Missing required fields"));
+    }
+
     // Parse public key
     let pubkey_bytes = match bs58::decode(&req.pubkey).into_vec() {
         Ok(bytes) => bytes,

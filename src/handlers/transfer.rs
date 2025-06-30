@@ -1,4 +1,6 @@
-use crate::models::{AccountInfo, InstructionData, SendSolRequest, SendTokenRequest};
+use crate::models::{
+    AccountInfoCamelCase, SendSolRequest, SendTokenRequest, SolTransferData, TokenTransferData,
+};
 use crate::utils::{error_response, success_response};
 use actix_web::{web, HttpResponse, Result};
 use base64::{engine::general_purpose, Engine};
@@ -9,6 +11,11 @@ use std::str::FromStr;
 
 // Endpoint: POST /send/sol
 pub async fn send_sol(req: web::Json<SendSolRequest>) -> Result<HttpResponse> {
+    // Validate required fields
+    if req.from.is_empty() || req.to.is_empty() {
+        return Ok(error_response("Missing required fields"));
+    }
+
     let from = match Pubkey::from_str(&req.from) {
         Ok(pubkey) => pubkey,
         Err(_) => return Ok(error_response("Invalid from address")),
@@ -27,19 +34,11 @@ pub async fn send_sol(req: web::Json<SendSolRequest>) -> Result<HttpResponse> {
     let instruction = system_instruction::transfer(&from, &to, req.lamports);
 
     let accounts = vec![
-        AccountInfo {
-            pubkey: instruction.accounts[0].pubkey.to_string(),
-            is_signer: instruction.accounts[0].is_signer,
-            is_writable: instruction.accounts[0].is_writable,
-        },
-        AccountInfo {
-            pubkey: instruction.accounts[1].pubkey.to_string(),
-            is_signer: instruction.accounts[1].is_signer,
-            is_writable: instruction.accounts[1].is_writable,
-        },
+        instruction.accounts[0].pubkey.to_string(),
+        instruction.accounts[1].pubkey.to_string(),
     ];
 
-    let instruction_data = InstructionData {
+    let instruction_data = SolTransferData {
         program_id: instruction.program_id.to_string(),
         accounts,
         instruction_data: general_purpose::STANDARD.encode(&instruction.data),
@@ -50,6 +49,11 @@ pub async fn send_sol(req: web::Json<SendSolRequest>) -> Result<HttpResponse> {
 
 // Endpoint: POST /send/token
 pub async fn send_token(req: web::Json<SendTokenRequest>) -> Result<HttpResponse> {
+    // Validate required fields
+    if req.destination.is_empty() || req.mint.is_empty() || req.owner.is_empty() {
+        return Ok(error_response("Missing required fields"));
+    }
+
     let destination = match Pubkey::from_str(&req.destination) {
         Ok(pubkey) => pubkey,
         Err(_) => return Ok(error_response("Invalid destination address")),
@@ -86,17 +90,16 @@ pub async fn send_token(req: web::Json<SendTokenRequest>) -> Result<HttpResponse
         Err(_) => return Ok(error_response("Failed to create transfer instruction")),
     };
 
-    let accounts: Vec<AccountInfo> = instruction
+    let accounts: Vec<AccountInfoCamelCase> = instruction
         .accounts
         .iter()
-        .map(|account| AccountInfo {
+        .map(|account| AccountInfoCamelCase {
             pubkey: account.pubkey.to_string(),
             is_signer: account.is_signer,
-            is_writable: account.is_writable,
         })
         .collect();
 
-    let instruction_data = InstructionData {
+    let instruction_data = TokenTransferData {
         program_id: instruction.program_id.to_string(),
         accounts,
         instruction_data: general_purpose::STANDARD.encode(&instruction.data),

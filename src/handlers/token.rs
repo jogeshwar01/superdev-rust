@@ -9,6 +9,11 @@ use std::str::FromStr;
 
 // Endpoint: POST /token/create
 pub async fn create_token(req: web::Json<CreateTokenRequest>) -> Result<HttpResponse> {
+    // Validate required fields
+    if req.mint_authority.is_empty() || req.mint.is_empty() {
+        return Ok(error_response("Missing required fields"));
+    }
+
     let mint_authority = match Pubkey::from_str(&req.mint_authority) {
         Ok(pubkey) => pubkey,
         Err(_) => return Ok(error_response("Invalid mint authority address")),
@@ -56,6 +61,11 @@ pub async fn create_token(req: web::Json<CreateTokenRequest>) -> Result<HttpResp
 
 // Endpoint: POST /token/mint
 pub async fn mint_token(req: web::Json<MintTokenRequest>) -> Result<HttpResponse> {
+    // Validate required fields
+    if req.mint.is_empty() || req.destination.is_empty() || req.authority.is_empty() {
+        return Ok(error_response("Missing required fields"));
+    }
+
     let mint = match Pubkey::from_str(&req.mint) {
         Ok(pubkey) => pubkey,
         Err(_) => return Ok(error_response("Invalid mint address")),
@@ -70,6 +80,10 @@ pub async fn mint_token(req: web::Json<MintTokenRequest>) -> Result<HttpResponse
         Ok(pubkey) => pubkey,
         Err(_) => return Ok(error_response("Invalid authority address")),
     };
+
+    if req.amount == 0 {
+        return Ok(error_response("Amount must be greater than 0"));
+    }
 
     // Get associated token account for destination
     let destination_ata = get_associated_token_address(&destination, &mint);
