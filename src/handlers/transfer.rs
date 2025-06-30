@@ -16,49 +16,45 @@ pub async fn send_sol(req: HttpRequest, body: web::Json<SendSolRequest>) -> Resu
 
     // Validate required fields
     if body.from.is_empty() || body.to.is_empty() {
-        let error_msg = "Missing required fields";
-        log_response(
-            "/send/sol",
-            400,
-            &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-        );
-        return Ok(error_response(error_msg));
+        let error_response_json = json!({
+            "success": false,
+            "error": "Missing required fields"
+        });
+        log_response("/send/sol", 400, &error_response_json.to_string());
+        return Ok(error_response("Missing required fields"));
     }
 
     let from = match Pubkey::from_str(&body.from) {
         Ok(pubkey) => pubkey,
         Err(_) => {
-            let error_msg = "Invalid from address";
-            log_response(
-                "/send/sol",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid from address"
+            });
+            log_response("/send/sol", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid from address"));
         }
     };
 
     let to = match Pubkey::from_str(&body.to) {
         Ok(pubkey) => pubkey,
         Err(_) => {
-            let error_msg = "Invalid to address";
-            log_response(
-                "/send/sol",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid to address"
+            });
+            log_response("/send/sol", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid to address"));
         }
     };
 
     if body.lamports == 0 {
-        let error_msg = "Amount must be greater than 0";
-        log_response(
-            "/send/sol",
-            400,
-            &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-        );
-        return Ok(error_response(error_msg));
+        let error_response_json = json!({
+            "success": false,
+            "error": "Amount must be greater than 0"
+        });
+        log_response("/send/sol", 400, &error_response_json.to_string());
+        return Ok(error_response("Amount must be greater than 0"));
     }
 
     // Create transfer instruction
@@ -76,7 +72,13 @@ pub async fn send_sol(req: HttpRequest, body: web::Json<SendSolRequest>) -> Resu
     };
 
     let response = success_response(&instruction_data);
-    log_response("/send/sol", 200, &json!(instruction_data).to_string());
+
+    // Log the actual wrapped response format
+    let wrapped_response = json!({
+        "success": true,
+        "data": instruction_data
+    });
+    log_response("/send/sol", 200, &wrapped_response.to_string());
 
     Ok(response)
 }
@@ -90,62 +92,57 @@ pub async fn send_token(
 
     // Validate required fields
     if body.destination.is_empty() || body.mint.is_empty() || body.owner.is_empty() {
-        let error_msg = "Missing required fields";
-        log_response(
-            "/send/token",
-            400,
-            &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-        );
-        return Ok(error_response(error_msg));
+        let error_response_json = json!({
+            "success": false,
+            "error": "Missing required fields"
+        });
+        log_response("/send/token", 400, &error_response_json.to_string());
+        return Ok(error_response("Missing required fields"));
     }
 
     let destination = match Pubkey::from_str(&body.destination) {
         Ok(pubkey) => pubkey,
         Err(_) => {
-            let error_msg = "Invalid destination address";
-            log_response(
-                "/send/token",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid destination address"
+            });
+            log_response("/send/token", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid destination address"));
         }
     };
 
     let mint = match Pubkey::from_str(&body.mint) {
         Ok(pubkey) => pubkey,
         Err(_) => {
-            let error_msg = "Invalid mint address";
-            log_response(
-                "/send/token",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid mint address"
+            });
+            log_response("/send/token", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid mint address"));
         }
     };
 
     let owner = match Pubkey::from_str(&body.owner) {
         Ok(pubkey) => pubkey,
         Err(_) => {
-            let error_msg = "Invalid owner address";
-            log_response(
-                "/send/token",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid owner address"
+            });
+            log_response("/send/token", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid owner address"));
         }
     };
 
     if body.amount == 0 {
-        let error_msg = "Amount must be greater than 0";
-        log_response(
-            "/send/token",
-            400,
-            &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-        );
-        return Ok(error_response(error_msg));
+        let error_response_json = json!({
+            "success": false,
+            "error": "Amount must be greater than 0"
+        });
+        log_response("/send/token", 400, &error_response_json.to_string());
+        return Ok(error_response("Amount must be greater than 0"));
     }
 
     // Get associated token accounts
@@ -163,13 +160,12 @@ pub async fn send_token(
     ) {
         Ok(inst) => inst,
         Err(_) => {
-            let error_msg = "Failed to create transfer instruction";
-            log_response(
-                "/send/token",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Failed to create transfer instruction"
+            });
+            log_response("/send/token", 400, &error_response_json.to_string());
+            return Ok(error_response("Failed to create transfer instruction"));
         }
     };
 
@@ -189,7 +185,13 @@ pub async fn send_token(
     };
 
     let response = success_response(&instruction_data);
-    log_response("/send/token", 200, &json!(instruction_data).to_string());
+
+    // Log the actual wrapped response format
+    let wrapped_response = json!({
+        "success": true,
+        "data": instruction_data
+    });
+    log_response("/send/token", 200, &wrapped_response.to_string());
 
     Ok(response)
 }

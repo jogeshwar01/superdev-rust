@@ -2098,6 +2098,7 @@ checksum = "fe4cd85333e22411419a0bcae1297d25e58c9443848b11dc6a86fefe8c78a661"
 dependencies = [
  "equivalent",
  "hashbrown 0.15.4",
+ "serde",
 ]
 
 [[package]]
@@ -3375,6 +3376,7 @@ version = "1.0.140"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "20068b6e96dc6c9bd23e01df8827e6c7e1f2fddd43c21810382803c136b99373"
 dependencies = [
+ "indexmap 2.10.0",
  "itoa",
  "memchr",
  "ryu",
@@ -4532,6 +4534,7 @@ dependencies = [
  "chrono",
  "dotenv",
  "env_logger 0.10.2",
+ "indexmap 2.10.0",
  "serde",
  "serde_json",
  "solana-client",

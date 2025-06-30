@@ -18,39 +18,36 @@ pub async fn sign_message(
 
     // Check for missing required fields
     if body.message.is_empty() || body.secret.is_empty() {
-        let error_msg = "Missing required fields";
-        log_response(
-            "/message/sign",
-            400,
-            &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-        );
-        return Ok(error_response(error_msg));
+        let error_response_json = json!({
+            "success": false,
+            "error": "Missing required fields"
+        });
+        log_response("/message/sign", 400, &error_response_json.to_string());
+        return Ok(error_response("Missing required fields"));
     }
 
     // Decode the secret key
     let secret_bytes = match bs58::decode(&body.secret).into_vec() {
         Ok(bytes) => bytes,
         Err(_) => {
-            let error_msg = "Invalid secret key format";
-            log_response(
-                "/message/sign",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid secret key format"
+            });
+            log_response("/message/sign", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid secret key format"));
         }
     };
 
     let keypair = match Keypair::from_bytes(&secret_bytes) {
         Ok(kp) => kp,
         Err(_) => {
-            let error_msg = "Invalid secret key";
-            log_response(
-                "/message/sign",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid secret key"
+            });
+            log_response("/message/sign", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid secret key"));
         }
     };
 
@@ -58,14 +55,20 @@ pub async fn sign_message(
     let message_bytes = body.message.as_bytes();
     let signature = keypair.sign_message(message_bytes);
 
-    let response_data = json!({
+    let data = json!({
         "signature": general_purpose::STANDARD.encode(signature.as_ref()),
         "public_key": bs58::encode(keypair.pubkey().to_bytes()).into_string(),
         "message": body.message
     });
 
-    let response = success_response(response_data.clone());
-    log_response("/message/sign", 200, &response_data.to_string());
+    let response = success_response(data.clone());
+
+    // Log the actual wrapped response format
+    let wrapped_response = json!({
+        "success": true,
+        "data": data
+    });
+    log_response("/message/sign", 200, &wrapped_response.to_string());
 
     Ok(response)
 }
@@ -79,39 +82,36 @@ pub async fn verify_message(
 
     // Check for missing required fields
     if body.message.is_empty() || body.signature.is_empty() || body.pubkey.is_empty() {
-        let error_msg = "Missing required fields";
-        log_response(
-            "/message/verify",
-            400,
-            &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-        );
-        return Ok(error_response(error_msg));
+        let error_response_json = json!({
+            "success": false,
+            "error": "Missing required fields"
+        });
+        log_response("/message/verify", 400, &error_response_json.to_string());
+        return Ok(error_response("Missing required fields"));
     }
 
     // Parse public key
     let pubkey_bytes = match bs58::decode(&body.pubkey).into_vec() {
         Ok(bytes) => bytes,
         Err(_) => {
-            let error_msg = "Invalid public key format";
-            log_response(
-                "/message/verify",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid public key format"
+            });
+            log_response("/message/verify", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid public key format"));
         }
     };
 
     let pubkey = match Pubkey::try_from(pubkey_bytes.as_slice()) {
         Ok(pk) => pk,
         Err(_) => {
-            let error_msg = "Invalid public key";
-            log_response(
-                "/message/verify",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid public key"
+            });
+            log_response("/message/verify", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid public key"));
         }
     };
 
@@ -119,26 +119,24 @@ pub async fn verify_message(
     let signature_bytes = match general_purpose::STANDARD.decode(&body.signature) {
         Ok(bytes) => bytes,
         Err(_) => {
-            let error_msg = "Invalid signature format";
-            log_response(
-                "/message/verify",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid signature format"
+            });
+            log_response("/message/verify", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid signature format"));
         }
     };
 
     let signature = match Signature::try_from(signature_bytes.as_slice()) {
         Ok(sig) => sig,
         Err(_) => {
-            let error_msg = "Invalid signature";
-            log_response(
-                "/message/verify",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid signature"
+            });
+            log_response("/message/verify", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid signature"));
         }
     };
 
@@ -146,14 +144,20 @@ pub async fn verify_message(
     let message_bytes = body.message.as_bytes();
     let is_valid = signature.verify(&pubkey.to_bytes(), message_bytes);
 
-    let response_data = json!({
+    let data = json!({
         "valid": is_valid,
         "message": body.message,
         "pubkey": body.pubkey
     });
 
-    let response = success_response(response_data.clone());
-    log_response("/message/verify", 200, &response_data.to_string());
+    let response = success_response(data.clone());
+
+    // Log the actual wrapped response format
+    let wrapped_response = json!({
+        "success": true,
+        "data": data
+    });
+    log_response("/message/verify", 200, &wrapped_response.to_string());
 
     Ok(response)
 }

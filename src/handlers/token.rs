@@ -17,38 +17,35 @@ pub async fn create_token(
 
     // Validate required fields
     if body.mint_authority.is_empty() || body.mint.is_empty() {
-        let error_msg = "Missing required fields";
-        log_response(
-            "/token/create",
-            400,
-            &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-        );
-        return Ok(error_response(error_msg));
+        let error_response_json = json!({
+            "success": false,
+            "error": "Missing required fields"
+        });
+        log_response("/token/create", 400, &error_response_json.to_string());
+        return Ok(error_response("Missing required fields"));
     }
 
     let mint_authority = match Pubkey::from_str(&body.mint_authority) {
         Ok(pubkey) => pubkey,
         Err(_) => {
-            let error_msg = "Invalid mint authority address";
-            log_response(
-                "/token/create",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid mint authority address"
+            });
+            log_response("/token/create", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid mint authority address"));
         }
     };
 
     let mint = match Pubkey::from_str(&body.mint) {
         Ok(pubkey) => pubkey,
         Err(_) => {
-            let error_msg = "Invalid mint address";
-            log_response(
-                "/token/create",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid mint address"
+            });
+            log_response("/token/create", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid mint address"));
         }
     };
 
@@ -62,13 +59,14 @@ pub async fn create_token(
     ) {
         Ok(inst) => inst,
         Err(_) => {
-            let error_msg = "Failed to create initialize mint instruction";
-            log_response(
-                "/token/create",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Failed to create initialize mint instruction"
+            });
+            log_response("/token/create", 400, &error_response_json.to_string());
+            return Ok(error_response(
+                "Failed to create initialize mint instruction",
+            ));
         }
     };
 
@@ -89,7 +87,13 @@ pub async fn create_token(
     };
 
     let response = success_response(&instruction_data);
-    log_response("/token/create", 200, &json!(instruction_data).to_string());
+
+    // Log the actual wrapped response format
+    let wrapped_response = json!({
+        "success": true,
+        "data": instruction_data
+    });
+    log_response("/token/create", 200, &wrapped_response.to_string());
 
     Ok(response)
 }
@@ -103,62 +107,57 @@ pub async fn mint_token(
 
     // Validate required fields
     if body.mint.is_empty() || body.destination.is_empty() || body.authority.is_empty() {
-        let error_msg = "Missing required fields";
-        log_response(
-            "/token/mint",
-            400,
-            &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-        );
-        return Ok(error_response(error_msg));
+        let error_response_json = json!({
+            "success": false,
+            "error": "Missing required fields"
+        });
+        log_response("/token/mint", 400, &error_response_json.to_string());
+        return Ok(error_response("Missing required fields"));
     }
 
     let mint = match Pubkey::from_str(&body.mint) {
         Ok(pubkey) => pubkey,
         Err(_) => {
-            let error_msg = "Invalid mint address";
-            log_response(
-                "/token/mint",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid mint address"
+            });
+            log_response("/token/mint", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid mint address"));
         }
     };
 
     let destination = match Pubkey::from_str(&body.destination) {
         Ok(pubkey) => pubkey,
         Err(_) => {
-            let error_msg = "Invalid destination address";
-            log_response(
-                "/token/mint",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid destination address"
+            });
+            log_response("/token/mint", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid destination address"));
         }
     };
 
     let authority = match Pubkey::from_str(&body.authority) {
         Ok(pubkey) => pubkey,
         Err(_) => {
-            let error_msg = "Invalid authority address";
-            log_response(
-                "/token/mint",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Invalid authority address"
+            });
+            log_response("/token/mint", 400, &error_response_json.to_string());
+            return Ok(error_response("Invalid authority address"));
         }
     };
 
     if body.amount == 0 {
-        let error_msg = "Amount must be greater than 0";
-        log_response(
-            "/token/mint",
-            400,
-            &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-        );
-        return Ok(error_response(error_msg));
+        let error_response_json = json!({
+            "success": false,
+            "error": "Amount must be greater than 0"
+        });
+        log_response("/token/mint", 400, &error_response_json.to_string());
+        return Ok(error_response("Amount must be greater than 0"));
     }
 
     // Get associated token account for destination
@@ -175,13 +174,12 @@ pub async fn mint_token(
     ) {
         Ok(inst) => inst,
         Err(_) => {
-            let error_msg = "Failed to create mint to instruction";
-            log_response(
-                "/token/mint",
-                400,
-                &format!(r#"{{"success":false,"error":"{}"}}"#, error_msg),
-            );
-            return Ok(error_response(error_msg));
+            let error_response_json = json!({
+                "success": false,
+                "error": "Failed to create mint to instruction"
+            });
+            log_response("/token/mint", 400, &error_response_json.to_string());
+            return Ok(error_response("Failed to create mint to instruction"));
         }
     };
 
@@ -202,7 +200,13 @@ pub async fn mint_token(
     };
 
     let response = success_response(&instruction_data);
-    log_response("/token/mint", 200, &json!(instruction_data).to_string());
+
+    // Log the actual wrapped response format
+    let wrapped_response = json!({
+        "success": true,
+        "data": instruction_data
+    });
+    log_response("/token/mint", 200, &wrapped_response.to_string());
 
     Ok(response)
 }

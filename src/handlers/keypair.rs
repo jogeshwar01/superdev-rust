@@ -11,13 +11,22 @@ pub async fn generate_keypair(req: HttpRequest) -> Result<HttpResponse> {
     let pubkey = bs58::encode(keypair.pubkey().to_bytes()).into_string();
     let secret = bs58::encode(keypair.to_bytes()).into_string();
 
-    let response_data = json!({
+    let data = json!({
         "pubkey": pubkey,
         "secret": secret
     });
 
-    let response = success_response(response_data.clone());
-    log_response("/keypair", 200, &response_data.to_string());
+    let response = success_response(data);
+
+    // Log the actual wrapped response format
+    let wrapped_response = json!({
+        "success": true,
+        "data": {
+            "pubkey": pubkey,
+            "secret": secret
+        }
+    });
+    log_response("/keypair", 200, &wrapped_response.to_string());
 
     Ok(response)
 }
